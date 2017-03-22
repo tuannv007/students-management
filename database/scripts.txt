@@ -1,0 +1,95 @@
+
+create table users(
+    id      int unsigned primary key auto_increment,
+    name    varchar(255),
+    account varchar(255),
+    password varchar(255),
+    email   varchar(255),
+    created_at  timestamp null default current_timestamp,
+    updated_at  timestamp null
+);
+
+create table departments(
+    id      int unsigned primary key auto_increment,
+    name    varchar(255),
+    code    varchar(255),
+    user_id int unsigned,
+    created_at   timestamp null default current_timestamp,
+    updated_at   timestamp null,
+    unique(code),
+    foreign key(user_id) references users(id) on update cascade on delete cascade
+);
+
+create table school_years(
+    id      int unsigned primary key auto_increment,
+    name    varchar(255),
+    label   varchar(255),
+    start_year  int(4),
+    end_year    int(4),
+    user_id     int unsigned,
+    created_at  timestamp null default current_timestamp,
+    updated_at  timestamp null,
+    unique(code),
+    foreign key(user_id) references users(id) on update cascade on delete cascade
+);
+
+create table classes(
+    id      int unsigned primary key auto_increment,
+    name    varchar(255),
+    code    varchar(255),
+    user_id int unsigned,
+    department_id   int unsigned,
+    school_year_id  int unsigned,
+    created_at  timestamp null default current_timestamp,
+    updated_at  timestamp null,
+    unique(code),
+    foreign key(user_id) references users(id) on update cascade on delete cascade,
+    foreign key(department_id) references departments(id) on update cascade on delete cascade,
+    foreign key(school_year_id) references school_years(id) on update cascade on delete cascade
+);
+
+create table students(
+    id      int unsigned primary key auto_increment,
+    name    varchar(255),
+    code    varchar(255),
+    birthday    date null,
+    gender  tinyint(1) default 1,
+    email   varchar(255) null,
+    phone   varchar(255) null,
+    address varchar(255) null,
+    user_id int unsigned,
+    class_id    int unsigned,
+    created_at  timestamp null default current_timestamp,
+    updated_at  timestamp null,
+    unique(code),
+    foreign key(user_id) references users(id) on update cascade on delete cascade,
+    foreign key(class_id) references classes(id) on update cascade on delete cascade
+);
+
+create table fees(
+    id  int unsigned primary key auto_increment,
+    year    int(4),
+    amount  float,
+    user_id int unsigned,
+    created_at  timestamp null default current_timestamp,
+    updated_at  timestamp null,
+    foreign key(user_id) references users(id) on update cascade on delete cascade
+);
+
+create table student_fee(
+    student_id int unsigned,
+    fee_id  int unsigned,
+    date_fee    date,
+    foreign key(student_id) references students(id) on update cascade on delete cascade,
+    foreign key(fee_id) references fees(id) on update cascade on delete cascade
+);
+
+create table payments(
+    id  int unsigned primary key auto_increment,
+    title   varchar(255),
+    description text null,
+    amount  float,
+    paid_date   date,
+    user_id   int unsigned,
+    foreign key(user_id) references users(id) on update cascade on delete cascade
+);
