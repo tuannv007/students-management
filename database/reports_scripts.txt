@@ -1,0 +1,17 @@
+# Thống kê lớp, khóa, sinh viên theo khoa, theo năm,
+select      departments.code,
+            departments.name,
+            count(distinct school_years.id) as school_years_count,
+            count(distinct classes.id) as classes_count,
+            count(students.id) as students_count
+from        departments
+left join   classes on departments.id = classes.department_id
+left join   school_years on classes.school_year_id = school_years.id
+left join   students on classes.id = students.class_id
+group by    departments.id
+
+# Danh sách lớp theo khoa và niên khóa
+select      classes.name, departments.name, school_years.label
+from        classes
+inner join  school_years on classes.school_year_id = school_years.id
+inner join  departments on classes.department_id = departments.id

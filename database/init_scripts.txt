@@ -1,5 +1,5 @@
 
-create table users(
+create table if not exists users(
     id      int unsigned primary key auto_increment,
     name    varchar(255),
     account varchar(255),
@@ -9,7 +9,7 @@ create table users(
     updated_at  timestamp null
 );
 
-create table departments(
+create table if not exists departments(
     id      int unsigned primary key auto_increment,
     name    varchar(255),
     code    varchar(255),
@@ -20,7 +20,7 @@ create table departments(
     foreign key(user_id) references users(id) on update cascade on delete cascade
 );
 
-create table school_years(
+create table if not exists school_years(
     id      int unsigned primary key auto_increment,
     name    varchar(255),
     label   varchar(255),
@@ -29,11 +29,11 @@ create table school_years(
     user_id     int unsigned,
     created_at  timestamp null default current_timestamp,
     updated_at  timestamp null,
-    unique(code),
+    unique(name),
     foreign key(user_id) references users(id) on update cascade on delete cascade
 );
 
-create table classes(
+create table if not exists classes(
     id      int unsigned primary key auto_increment,
     name    varchar(255),
     code    varchar(255),
@@ -48,7 +48,7 @@ create table classes(
     foreign key(school_year_id) references school_years(id) on update cascade on delete cascade
 );
 
-create table students(
+create table if not exists students(
     id      int unsigned primary key auto_increment,
     name    varchar(255),
     code    varchar(255),
@@ -57,6 +57,7 @@ create table students(
     email   varchar(255) null,
     phone   varchar(255) null,
     address varchar(255) null,
+    finished    tinyint(1) default 0,
     user_id int unsigned,
     class_id    int unsigned,
     created_at  timestamp null default current_timestamp,
@@ -66,17 +67,19 @@ create table students(
     foreign key(class_id) references classes(id) on update cascade on delete cascade
 );
 
-create table fees(
+create table if not exists fees(
     id  int unsigned primary key auto_increment,
+    title varchar(255),
     year    int(4),
     amount  float,
+    description text null,
     user_id int unsigned,
     created_at  timestamp null default current_timestamp,
     updated_at  timestamp null,
     foreign key(user_id) references users(id) on update cascade on delete cascade
 );
 
-create table student_fee(
+create table if not exists student_fee(
     student_id int unsigned,
     fee_id  int unsigned,
     date_fee    date,
@@ -84,7 +87,7 @@ create table student_fee(
     foreign key(fee_id) references fees(id) on update cascade on delete cascade
 );
 
-create table payments(
+create table if not exists payments(
     id  int unsigned primary key auto_increment,
     title   varchar(255),
     description text null,
