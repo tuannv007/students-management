@@ -16,8 +16,8 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="login.html">
-                    <i class="fa fa-sign-out fa-fw"></i> Logout
+                <a href="/auth/logout">
+                    <i class="fa fa-sign-out fa-fw"></i> Đăng xuất
                 </a>
             </li>
         </ul>
