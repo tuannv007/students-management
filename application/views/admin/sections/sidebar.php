@@ -31,6 +31,12 @@
                 </a>
             </li>
             <li>
+                <a href="/admin/classes" title="Quản lý niên khóa">
+                    <i class="fa fa-cubes fa-fw"></i>
+                    <span class="text-uppercase">Quản lý lớp</span>
+                </a>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>

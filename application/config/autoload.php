@@ -141,4 +141,5 @@ $autoload['model'] = array(
     'user_model',
     'department_model',
     'school_year_model',
+    'class_model',
 );
