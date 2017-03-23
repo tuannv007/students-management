@@ -18,8 +18,8 @@ class Login extends CI_Controller
                     $this->session->set_userdata('user', $user);
                     redirect('admin/dashboard');
                 } else {
-                    $viewData['error'] = 'Tài khoản hoặc mật khẩu không chính xác.';
-                    $this->load->view('auth/login', $viewData);
+                    $view['error'] = 'Tài khoản hoặc mật khẩu không chính xác.';
+                    $this->load->view('auth/login', $view);
                 }
             }
         } else {

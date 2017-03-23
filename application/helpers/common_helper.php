@@ -12,6 +12,14 @@ if (! function_exists('pre')) {
     }
 }
 
+if (! function_exists('format_value')) {
+
+    function format_value($value)
+    {
+        return htmlspecialchars($value);
+    }
+}
+
 if (! function_exists('style')) {
 
     function style($href, array $options = [])
