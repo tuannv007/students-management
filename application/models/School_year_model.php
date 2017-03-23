@@ -30,6 +30,11 @@ class School_year_model extends CI_Model
         return $query2->limit($limit, $offset)->get()->result_array();
     }
 
+    public function get_all()
+    {
+        return $this->db->get('school_years')->result_array();
+    }
+
     public function create(array $data)
     {
         return $this->db->insert('school_years', $data);

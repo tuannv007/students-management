@@ -67,6 +67,11 @@ class Department_model extends CI_model
         return $query2->limit($limit, $offset)->get()->result_array();
     }
 
+    public function get_all()
+    {
+        return $this->db->get('departments')->result_array();
+    }
+
     public function create(array $data)
     {
         return $this->db->insert('departments', $data);
