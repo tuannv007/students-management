@@ -7,7 +7,7 @@ class MY_Pagination extends CI_Pagination
         parent::__construct($config);
 
         $config['base_url'] = base_url('/');
-        $config['total_rows'] = 200;
+        $config['total_rows'] = 0;
         $config['per_page'] = 20;
         $config['num_links'] = 5;
         $config['use_page_numbers'] = TRUE;
