@@ -140,4 +140,5 @@ $autoload['language'] = array();
 $autoload['model'] = array(
     'user_model',
     'department_model',
+    'school_year_model',
 );

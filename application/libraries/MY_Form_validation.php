@@ -6,8 +6,8 @@ class MY_Form_validation extends CI_Form_validation
     {
         list($table, $field, $key, $id) = explode('.', $params);
         $this->CI->db->from($table);
-        $this->CI->db->where($key, $id);
+        $this->CI->db->where("$key !=", $id);
         $this->CI->db->where($field, $value);
-        return $this->CI->db->get()->num_rows() > 0;
+        return $this->CI->db->get()->num_rows() == 0;
     }
 }
