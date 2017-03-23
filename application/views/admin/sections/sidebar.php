@@ -25,6 +25,12 @@
                 </a>
             </li>
             <li>
+                <a href="/admin/school-years" title="Quản lý niên khóa">
+                    <i class="fa fa-cubes fa-fw"></i>
+                    <span class="text-uppercase">Quản lý niên khóa</span>
+                </a>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
