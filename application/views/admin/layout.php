@@ -13,6 +13,12 @@
     <link href="<?php echo base_url('assets/admin/vendor/metisMenu/metisMenu.min.css'); ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('assets/admin/dist/css/sb-admin-2.css'); ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('assets/admin/vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript">
+        window.CI = {
+            baseUrl: '<?php echo base_url(); ?>'
+        };
+    </script>
 </head>
 
 <body>
@@ -52,5 +58,17 @@
     <script src="<?php echo base_url('assets/admin/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/admin/vendor/metisMenu/metisMenu.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/admin/dist/js/sb-admin-2.js'); ?>"></script>
+
+    <?php if (isset($scripts) && is_array($scripts)): ?>
+        <?php foreach ($scripts as $src): ?>
+            <script src="<?php echo base_url($src); ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($php_scripts) && is_array($php_scripts)): ?>
+        <?php foreach ($php_scripts as $view_script): ?>
+            <?php $this->load->view($view_script); ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 </html>

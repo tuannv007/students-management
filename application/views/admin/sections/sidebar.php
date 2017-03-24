@@ -37,6 +37,18 @@
                 </a>
             </li>
             <li>
+                <a href="/admin/students" title="Quản lý đoàn viên">
+                    <i class="fa fa-cubes fa-fw"></i>
+                    <span class="text-uppercase">Quản lý đoàn viên</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/trade" title="Quản lý thu chi">
+                    <i class="fa fa-cubes fa-fw"></i>
+                    <span class="text-uppercase">Quản lý thu chi</span>
+                </a>
+            </li>
+            <!-- <li>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -61,11 +73,9 @@
                                 <a href="#">Third Level Item</a>
                             </li>
                         </ul>
-                        <!-- /.nav-third-level -->
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            </li> -->
         </ul>
     </div>
 </div>
