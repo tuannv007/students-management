@@ -1,27 +1,31 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Class_model extends CI_Model
+class Student_model extends CI_Model
 {
     public function get_list($page = 1, $data = [])
     {
         $fields = [
-            'classes.id',
-            'classes.code',
-            'classes.name',
+            'students.id',
+            'students.code',
+            'students.name',
             'departments.name as department_name',
             'school_years.label as school_year_label',
+            'classes.name as class_name',
         ];
         $this->db->select($fields);
-        $this->db->from('classes');
-        $this->db->join('departments', 'classes.department_id =  departments.id');
+        $this->db->from('students');
+        $this->db->join('classes', 'students.class_id = classes.id');
+        $this->db->join('departments', 'classes.department_id = departments.id');
         $this->db->join('school_years', 'classes.school_year_id = school_years.id');
-
-        if (isset($data['name']) && $data['name']) {
-            $this->db->like('classes.name', $data['name']);
-        }
+        $this->db->order_by('departments.id');
+        $this->db->order_by('school_years.id');
 
         if (isset($data['code']) && $data['code']) {
-            $this->db->or_like('classes.code', $data['code']);
+            $this->db->or_like('students.code', $data['code']);
+        }
+
+        if (isset($data['name']) && $data['name']) {
+            $this->db->or_like('students.name', $data['name']);
         }
 
         $query2 = clone $query1 = $this->db;
@@ -41,30 +45,21 @@ class Class_model extends CI_Model
 
     public function create(array $data)
     {
-        return $this->db->insert('classes', $data);
+        return $this->db->insert('students', $data);
     }
 
     public function update($id, array $data)
     {
-        return $this->db->where('id', $id)->update('classes', $data);
+        return $this->db->where('id', $id)->update('students', $data);
     }
 
     public function delete($id)
     {
-        return $this->db->where('id', $id)->delete('classes');
+        return $this->db->where('id', $id)->delete('students');
     }
 
     public function find($id)
     {
-        return $this->db->where('id', $id)->get('classes')->row_array();
-    }
-
-    public function get_by_department_school_year($department_id, $school_year_id)
-    {
-        return $this->db
-            ->where('department_id', $department_id)
-            ->where('school_year_id', $school_year_id)
-            ->get('classes')->result_array();
-
+        return $this->db->where('id', $id)->get('students')->row_array();
     }
 }
