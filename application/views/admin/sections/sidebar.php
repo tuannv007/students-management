@@ -43,39 +43,17 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/trade" title="Quản lý thu chi">
+                <a href="/admin/fees" title="Quản lý khoản thu">
                     <i class="fa fa-cubes fa-fw"></i>
-                    <span class="text-uppercase">Quản lý thu chi</span>
+                    <span class="text-uppercase">Quản lý khoản thu</span>
                 </a>
             </li>
-            <!-- <li>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li> -->
+            <li>
+                <a href="/admin/output" title="Quản lý khoản chi">
+                    <i class="fa fa-cubes fa-fw"></i>
+                    <span class="text-uppercase">Quản lý khoản chi</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
