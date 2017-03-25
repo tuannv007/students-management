@@ -15,3 +15,28 @@ select      classes.name, departments.name, school_years.label
 from        classes
 inner join  school_years on classes.school_year_id = school_years.id
 inner join  departments on classes.department_id = departments.id
+
+# Thống kê danh sách đóng/chưa đóng đoàn phí
+select      students.code,
+            students.name,
+            classes.id as class_id,
+            classes.name as class_name,
+            student_fee.fee_id,
+            student_fee.date_fee
+from        students
+left join   student_fee on students.id = student_fee.student_id
+inner join  classes on classes.id = students.class_id
+where       classes.id = 1 and fee_id = 5
+
+select      distinct students.id,
+            students.code,
+            students.name,
+            classes.id as class_id,
+            classes.name as class_name,
+            student_fee.fee_id,
+            student_fee.date_fee
+from        students
+left join   student_fee on students.id = student_fee.student_id
+inner join  classes on classes.id = students.class_id
+where       classes.id = 1 and (fee_id = 3 or fee_id != 3 or fee_id is NULL)
+group by    students.id

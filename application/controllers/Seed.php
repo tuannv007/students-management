@@ -2,6 +2,15 @@
 
 class Seed extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (! $this->input->is_cli_request()) {
+            show_404();
+        }
+    }
+
     public function index()
     {
         $this->users_seeder();
@@ -89,6 +98,19 @@ class Seed extends CI_Controller
             ['title' => 'Đoàn phí 2015', 'amount' => '25000', 'year' => 2015, 'user_id' => $user_id],
             ['title' => 'Đoàn phí 2016', 'amount' => '25000', 'year' => 2016, 'user_id' => $user_id],
             ['title' => 'Đoàn phí 2017', 'amount' => '30000', 'year' => 2017, 'user_id' => $user_id],
+        ]);
+    }
+
+    public function payments_seeder()
+    {
+        $user_id = $this->db->where('account', 'system')->get('users')->row_array()['id'];
+
+        $this->db->insert('payments', [
+            'title' => 'Mua đồng phục',
+            'description' => 'Mua đồng phục',
+            'amount' => '20000',
+            'paid_date' => '2014-11-11',
+            'user_id' => $user_id,
         ]);
     }
 }
