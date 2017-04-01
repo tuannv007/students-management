@@ -54,6 +54,7 @@ class Student_model extends CI_Model
         $this->db->select($fields);
         $this->db->from('students');
         $this->db->join('classes', 'students.class_id = classes.id');
+        $this->db->where('classes.id', $class_id);
         $this->db->order_by('students.id', 'asc');
 
         $query2 = clone $query1 = $this->db;
