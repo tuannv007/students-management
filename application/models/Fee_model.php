@@ -73,20 +73,11 @@ class Fee_model extends CI_Model
 
     public function calculate_total_in_year($year)
     {
-        $this->db->select('count(student_fee.fee_id) * fees.amount as fee_subtotal');
-        $this->db->from('fees');
-        $this->db->join('student_fee', 'fees.id = student_fee.fee_id');
-        $this->db->where('year', $year);
-        $this->db->group_by('fees.id');
+        $sql = "SELECT sum(`fees`.`amount`) as input_total
+                FROM `fees`
+                INNER JOIN `student_fee` ON `fees`.`id` = `student_fee`.`fee_id`
+                WHERE year(`student_fee`.`date_fee`) = ?";
 
-        $fees = $this->db->get()->result_array();
-
-        $total = 0;
-
-        foreach ($fees as $key => $fee) {
-            $total = $total + $fee['fee_subtotal'];
-        }
-
-        return $total;
+        return $this->db->query($sql, [$year])->row_array()['input_total'];
     }
 }
