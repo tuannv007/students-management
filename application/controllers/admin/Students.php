@@ -35,7 +35,7 @@ class Students extends MY_Controller
                 $view['classes'] = $this->class_model->get_by_department_school_year($department_id, $school_year_id);
                 $view['gender'] = $this->config->item('gender');
                 $view['subview'] = 'admin/students/create';
-                $view['scripts'][] = 'assets/admin/modules/students/create.js';
+                $view['scripts'][] = 'public/assets/admin/modules/students/create.js';
                 $this->load->view('admin/layout', $view);
             }
         } else {
@@ -46,7 +46,7 @@ class Students extends MY_Controller
             $view['classes'] = $this->class_model->get_by_department_school_year($view['department_id'], $view['school_year_id']);
             $view['gender'] = $this->config->item('gender');
             $view['subview'] = 'admin/students/create';
-            $view['scripts'][] = 'assets/admin/modules/students/create.js';
+            $view['scripts'][] = 'public/assets/admin/modules/students/create.js';
             $this->load->view('admin/layout', $view);
         }
     }

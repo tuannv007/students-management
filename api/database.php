@@ -1,8 +1,8 @@
 <?php
 
-define('DB_HOSTNAME', '127.0.0.1');
+define('DB_HOSTNAME', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'Admin@123#');
+define('DB_PASSWORD', '');
 define('DB_DATABASE', 'students.dev');
 
 $link = @mysqli_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE)
@@ -48,8 +48,9 @@ function db_authenticate($account, $password)
 
 function db_get_all($table)
 {
+    global $link;
     $sql = "SELECT * FROM {$table}";
-
+    mysqli_set_charset($link, 'utf8');
     return db_fetch_all(db_query($sql));
 }
 
@@ -74,18 +75,19 @@ function db_get_students_by_class_id($class_id)
 
 function db_get_students_with_trade_in_class_by_fee($class_id, $fee_id)
 {
-    $sql = "SELECT `students`.`id`, `students`.`code`, `students`.`name`, `classes`.`name` as `class_name`
+    global $link;
+     $sql = "SELECT `students`.`id`, `students`.`code`, `students`.`name`, `classes`.`name` as `class_name`
         FROM `students`
         JOIN `classes` ON `students`.`class_id` = `classes`.`id`
         WHERE `classes`.`id` = '{$class_id}'
         ORDER BY `students`.`id` ASC";
-
+    mysqli_set_charset($link, 'utf8');
     $students = db_fetch_all(db_query($sql));
 
     $sql = "SELECT `student_id`, `date_fee`
             FROM `student_fee`
             WHERE `fee_id` = '{$fee_id}'";
-
+    mysqli_set_charset($link, 'utf8');
     $student_fees = db_fetch_all(db_query($sql));
 
     foreach ($student_fees as $key => $stf) {
@@ -102,7 +104,7 @@ function db_get_students_with_trade_in_class_by_fee($class_id, $fee_id)
             $students[$key]['fee_paid'] = 0;
         }
     }
-
+ 
     return $students;
 }
 
@@ -152,7 +154,7 @@ function db_insert_new_payments($data)
 
     $values = implode(',', $data);
 
-    $sql = "INSERT INTO payments(title, user_id, amount, description, paid_date) values({$values})";
+    $sql = "INSERT INTO payments(title, user_id, amount, description, paid_date,department_id) values({$values})";
 
     return db_query($sql);
 }
@@ -184,4 +186,38 @@ function db_calculate_input_total_in_year($year)
             WHERE year(`student_fee`.`date_fee`) = '{$year}'";
 
     return db_fetch_one(db_query($sql))['input_total'];
+}
+
+function db_calculate_input_total_by_department_year($department_id, $year)
+{
+    $sql = "SELECT sum(`fees`.`amount`) as input_total
+            FROM `fees`
+            INNER JOIN `student_fee` ON `fees`.`id` = `student_fee`.`fee_id`
+            INNER JOIN `students` ON `student_fee`.`student_id` = `students`.`id`
+            INNER JOIN `classes` ON `students`.`class_id` = `classes`.`id`
+            INNER JOIN `departments` ON `classes`.`department_id` = `departments`.`id`
+            WHERE `departments`.`id` = '{$department_id}' AND year(`student_fee`.`date_fee`) = '{$year}'";
+
+    return db_fetch_one(db_query($sql))['input_total'];
+}
+
+function db_calculate_output_total_by_department_year($department_id, $year)
+{
+    $sql = "SELECT sum(amount) as paid_total
+            FROM `payments`
+            WHERE `department_id` = '{$department_id}'
+            AND year(paid_date) = '{$year}'";
+
+    return db_fetch_one(db_query($sql))['paid_total'];
+}
+
+function db_get_payments_by_department_year($department_id, $year)
+{
+    $sql = "SELECT `payments`.`id`, `payments`.`title`, `payments`.`amount`, `payments`.`paid_date`, `users`.`name` as `user_name`
+            FROM `payments`
+            JOIN `users` ON `payments`.`user_id` = `users`.`id`
+            WHERE `department_id` = '{$department_id}'
+            AND year(paid_date) = '{$year}'";
+
+    return db_fetch_all(db_query($sql));
 }

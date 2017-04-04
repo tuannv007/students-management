@@ -80,4 +80,17 @@ class Fee_model extends CI_Model
 
         return $this->db->query($sql, [$year])->row_array()['input_total'];
     }
+
+    public function calculate_total_by_department_year($department_id, $year)
+    {
+         $sql = "SELECT sum(`fees`.`amount`) as input_total
+                 FROM `fees`
+                 INNER JOIN `student_fee` ON `fees`.`id` = `student_fee`.`fee_id`
+                 INNER JOIN `students` ON `student_fee`.`student_id` = `students`.`id`
+                 INNER JOIN `classes` ON `students`.`class_id` = `classes`.`id`
+                 INNER JOIN `departments` ON `classes`.`department_id` = `departments`.`id`
+                 WHERE `departments`.`id` = ? AND year(`student_fee`.`date_fee`) = ?";
+
+        return $this->db->query($sql, [$department_id, $year])->row_array()['input_total'];
+    }
 }

@@ -10,3 +10,5 @@ echo json_encode([
         'classes' => db_find_classes_by_department_and_school_year($department_id, $school_year_id),
     ],
 ]);
+// lay ra danh sach lop
+//done

@@ -43,7 +43,7 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <label for="">Tên khoản chi *</label>
+                        <label for="">Tên khoản chi * (Chi cho khoa <?php echo $department['name']; ?>)</label>
                         <input value="<?php echo set_value('title'); ?>" type="text" name="title" class="form-control">
                         <span class="help-block">
                             <span class="text-danger">

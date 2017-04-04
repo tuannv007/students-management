@@ -5,6 +5,6 @@ include 'database.php';
 include 'functions.php';
 
 $uri = $_SERVER['REQUEST_URI'];
-list($uri, $query) = explode('?', $uri);
+list($uri) = explode('?', $uri);
 
-include $file = BASE_PATH . $uri . '.php'; die;
+include $file = BASE_PATH . $uri . '.php';

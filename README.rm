@@ -1,0 +1,14 @@
+1. Open /application/config/config.php
+    $config['base_url'] = 'http://students.dev/'; => $config['base_url'] = 'http://yourdomain.com/';
+
+2. Open /application/config/database.php
+    'hostname' => 'localhost',    -> 'hostname' => 'your host name',
+    'username' => 'root',         -> 'username' => 'user database username',
+    'password' => 'Admin@123#',   -> 'password' => 'your database username's password',
+    'database' => 'students.dev', -> 'database' => 'your database name',
+
+3. Open /api/init.php
+    define('DB_HOSTNAME', '127.0.0.1');    -> define('DB_HOSTNAME', 'your host name');
+    define('DB_USERNAME', 'root');         -> define('DB_USERNAME', 'your database username');
+    define('DB_PASSWORD', 'Admin@123#');   -> define('DB_PASSWORD', 'your database username's password');
+    define('DB_DATABASE', 'students.dev'); -> define('DB_DATABASE', 'your database name');

@@ -18,6 +18,10 @@ function sess_put($key, $value)
 
 function sess_all()
 {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    
     return $_SESSION;
 }
 

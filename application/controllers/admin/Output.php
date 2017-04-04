@@ -5,19 +5,23 @@ class Output extends MY_Controller
     public function index()
     {
         $page = $this->input->get('page');
+        $view['departments'] = $this->department_model->get_all();
+        $view['department_id'] = $department_id = $this->input->get('department_id');
         $view['year'] = $year = $this->input->get('year');
-        $view['input_total'] = $this->fee_model->calculate_total_in_year($view['year']);
-        $view['output_total'] = $this->payment_model->calculate_paid_in_year($view['year']);
-        $view['payments'] = $this->payment_model->get_list_in_year($year, $page, []);
+        $view['input_total'] = $this->fee_model->calculate_total_by_department_year($view['department_id'], $view['year']);
+        $view['output_total'] = $this->payment_model->calculate_paid_by_department_year($view['department_id'], $view['year']);
+        $view['payments'] = $this->payment_model->get_list_by_department_year($department_id, $year, $page, []);
         $view['subview'] = 'admin/trade/output';
         $this->load->view('admin/layout', $view);
     }
 
-    public function create()
+    public function create($department_id)
     {
-        $view['year'] = date('Y');
-        $view['input_total'] = $this->fee_model->calculate_total_in_year($view['year']);
-        $view['output_total'] = $this->payment_model->calculate_paid_in_year($view['year']);
+        $view['year'] = $year = date('Y');
+        $view['department'] = $this->department_model->find($department_id);
+        $view['departments'] = $this->department_model->get_all();
+        $view['input_total'] = $this->fee_model->calculate_total_by_department_year($department_id, $year);
+        $view['output_total'] = $this->payment_model->calculate_paid_by_department_year($department_id, $year);
         $view['remain_total'] = $view['input_total'] - $view['output_total'];
         $view['subview'] = 'admin/trade/create';
 
@@ -26,6 +30,7 @@ class Output extends MY_Controller
             $data['amount'] = $this->input->post('amount');
             $data['description'] = $this->input->post('description');
             $data['paid_date'] = date('Y-m-d');
+            $data['department_id'] = $department_id;
             $data['user_id'] = $this->session->userdata('user')['id'];
 
             if ($data['amount'] > $view['remain_total']) {

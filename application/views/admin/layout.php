@@ -9,10 +9,10 @@
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-    <link href="<?php echo base_url('assets/admin/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet"/>
-    <link href="<?php echo base_url('assets/admin/vendor/metisMenu/metisMenu.min.css'); ?>" rel="stylesheet"/>
-    <link href="<?php echo base_url('assets/admin/dist/css/sb-admin-2.css'); ?>" rel="stylesheet"/>
-    <link href="<?php echo base_url('assets/admin/vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url('public/assets/admin/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('public/assets/admin/vendor/metisMenu/metisMenu.min.css'); ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('public/assets/admin/dist/css/sb-admin-2.css'); ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('public/assets/admin/vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript">
         window.CI = {
@@ -54,10 +54,10 @@
         </div>
     </div>
 
-    <script src="<?php echo base_url('assets/admin/vendor/jquery/jquery.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/vendor/metisMenu/metisMenu.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/admin/dist/js/sb-admin-2.js'); ?>"></script>
+    <script src="<?php echo base_url('public/assets/admin/vendor/jquery/jquery.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/assets/admin/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/assets/admin/vendor/metisMenu/metisMenu.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/assets/admin/dist/js/sb-admin-2.js'); ?>"></script>
 
     <?php if (isset($scripts) && is_array($scripts)): ?>
         <?php foreach ($scripts as $src): ?>
